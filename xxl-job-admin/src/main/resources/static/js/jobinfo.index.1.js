@@ -210,6 +210,7 @@ $(function() {
 		} else {
 			return;
 		}
+
 		
 		var id = $(this).parents('ul').attr("_id");
 
@@ -278,12 +279,15 @@ $(function() {
 
 	// add
 	$(".add").click(function(){
+		$("#addModal .form input[name='jobCron']").cronGen({
+			direction : 'bottom'
+		});
 		$('#addModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
 	var addModalValidate = $("#addModal .form").validate({
-		errorElement : 'span',  
+		errorElement : 'span',
         errorClass : 'help-block',
-        focusInvalid : true,  
+        focusInvalid : true,
         rules : {
 			jobDesc : {
 				required : true,
@@ -301,8 +305,8 @@ $(function() {
             executorFailRetryCount : {
                 digits:true
             }
-        }, 
-        messages : {  
+        },
+        messages : {
             jobDesc : {
             	required : I18n.system_please_input + I18n.jobinfo_field_jobdesc
             },
@@ -319,15 +323,15 @@ $(function() {
                 digits: I18n.system_please_input + I18n.system_digits
             }
         },
-		highlight : function(element) {  
-            $(element).closest('.form-group').addClass('has-error');  
+		highlight : function(element) {
+            $(element).closest('.form-group').addClass('has-error');
         },
-        success : function(label) {  
-            label.closest('.form-group').removeClass('has-error');  
-            label.remove();  
+        success : function(label) {
+            label.closest('.form-group').removeClass('has-error');
+            label.remove();
         },
-        errorPlacement : function(error, element) {  
-            element.parent('div').append(error);  
+        errorPlacement : function(error, element) {
+            element.parent('div').append(error);
         },
         submitHandler : function(form) {
 
@@ -375,6 +379,8 @@ $(function() {
 		$(".remote_panel").show();	// remote
 
 		$("#addModal .form input[name='executorHandler']").removeAttr("readonly");
+		$("#cron2").empty();
+		$("#cron2").append('<input type="text" class="form-control" name="jobCron" placeholder="${I18n.system_please_input}Cron" maxlength="128" onchange="test()"  >');
 	});
 
 
@@ -403,7 +409,7 @@ $(function() {
 		} else if ('GLUE_PHP'==glueType){
             $("#addModal .form textarea[name='glueSource']").val( $("#addModal .form .glueSource_php").val() );
         } else if ('GLUE_NODEJS'==glueType){
-			$("#addModal .form textarea[name='glueSource']").val( $("#addModal .form .glueSource_nodejs").val() );			
+			$("#addModal .form textarea[name='glueSource']").val( $("#addModal .form .glueSource_nodejs").val() );
 		} else if ('GLUE_POWERSHELL'==glueType){
             $("#addModal .form textarea[name='glueSource']").val( $("#addModal .form .glueSource_powershell").val() );
         } else {
@@ -422,6 +428,9 @@ $(function() {
 		$('#updateModal .form select[name=jobGroup] option[value='+ row.jobGroup +']').prop('selected', true);
 		$("#updateModal .form input[name='jobDesc']").val( row.jobDesc );
 		$("#updateModal .form input[name='jobCron']").val( row.jobCron );
+		$("#updateModal .form input[name='jobCron']").cronGen({
+			direction : 'bottom'
+		});
 		$("#updateModal .form input[name='author']").val( row.author );
 		$("#updateModal .form input[name='alarmEmail']").val( row.alarmEmail );
 		$("#updateModal .form input[name='executorTimeout']").val( row.executorTimeout );
@@ -439,7 +448,7 @@ $(function() {
 		$('#updateModal').modal({backdrop: false, keyboard: false}).modal('show');
 	});
 	var updateModalValidate = $("#updateModal .form").validate({
-		errorElement : 'span',  
+		errorElement : 'span',
         errorClass : 'help-block',
         focusInvalid : true,
 
@@ -479,14 +488,14 @@ $(function() {
             }
 		},
 		highlight : function(element) {
-            $(element).closest('.form-group').addClass('has-error');  
+            $(element).closest('.form-group').addClass('has-error');
         },
-        success : function(label) {  
-            label.closest('.form-group').removeClass('has-error');  
-            label.remove();  
+        success : function(label) {
+            label.closest('.form-group').removeClass('has-error');
+            label.remove();
         },
-        errorPlacement : function(error, element) {  
-            element.parent('div').append(error);  
+        errorPlacement : function(error, element) {
+            element.parent('div').append(error);
         },
         submitHandler : function(form) {
 
@@ -528,7 +537,9 @@ $(function() {
 		}
 	});
 	$("#updateModal").on('hide.bs.modal', function () {
-		$("#updateModal .form")[0].reset()
+		$("#updateModal .form")[0].reset();
+		$("#cron1").empty();
+		$("#cron1").append('<input type="text" class="form-control" name="jobCron" placeholder="${I18n.system_please_input}Cron" maxlength="128" onchange="test()"  >');
 	});
 
     /**

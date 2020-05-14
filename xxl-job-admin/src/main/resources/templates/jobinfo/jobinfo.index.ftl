@@ -4,7 +4,25 @@
   	<#import "../common/common.macro.ftl" as netCommon>
 	<@netCommon.commonStyle />
 	<!-- DataTables -->
-  	<link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+  	<link rel="stylesheet" href="${request.contextPath}/static/adminlte/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" >
+<#--        <link rel="stylesheet" href="${request.contextPath}/static/bootstrap.min.css" >-->
+    <link rel="stylesheet" href="${request.contextPath}/static/cronGen.css" >
+    <link rel="stylesheet" href="${request.contextPath}/static/font/font-awesome.min.css">
+    <script src="${request.contextPath}/static/js/jquery-2.1.4.min.js"></script>
+    <script src="${request.contextPath}/static/js/later.min.js"></script>
+<#--    <script type="text/javascript">-->
+<#--        $(function() {-->
+<#--            $("#cron1").val("cron1");-->
+<#--            $("#cron2").val("cron2");-->
+<#--            $("#cron1").cronGen({-->
+<#--                direction : 'bottom'-->
+<#--            });-->
+<#--            $("#cron2").cronGen({-->
+<#--                direction : 'bottom'-->
+<#--            });-->
+
+<#--        });-->
+<#--    </script>-->
     <title>${I18n.admin_name}</title>
 </head>
 <body class="hold-transition skin-blue sidebar-mini <#if cookieMap?exists && cookieMap["xxljob_adminlte_settings"]?exists && "off" == cookieMap["xxljob_adminlte_settings"].value >sidebar-collapse</#if>">
@@ -136,7 +154,7 @@
                             </select>
                         </div>
                         <label for="lastname" class="col-sm-2 control-label">Cron<font color="red">*</font></label>
-                        <div class="col-sm-4"><input type="text" class="form-control" name="jobCron" placeholder="${I18n.system_please_input}Cron" maxlength="128" ></div>
+                        <div class="col-sm-4" id="cron2"><input type="text" class="form-control" name="jobCron" placeholder="${I18n.system_please_input}Cron" maxlength="128" onchange="test()"  ></div>
                     </div>
                     <div class="form-group">
                         <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_gluetype}<font color="red">*</font></label>
@@ -332,7 +350,7 @@ exit 0
                             </select>
                         </div>
                         <label for="lastname" class="col-sm-2 control-label">Cron<font color="red">*</font></label>
-                        <div class="col-sm-4"><input type="text" class="form-control" name="jobCron" placeholder="${I18n.system_please_input}Cron" maxlength="128" ></div>
+                        <div id="cron1" class="col-sm-4"><input type="text" class="form-control" name="jobCron" placeholder="${I18n.system_please_input}Cron" maxlength="128" onchange="test()"  ></div>
                     </div>
                     <div class="form-group">
                         <label for="firstname" class="col-sm-2 control-label">${I18n.jobinfo_field_gluetype}<font color="red">*</font></label>
@@ -428,5 +446,6 @@ exit 0
 <!-- moment -->
 <script src="${request.contextPath}/static/adminlte/bower_components/moment/moment.min.js"></script>
 <script src="${request.contextPath}/static/js/jobinfo.index.1.js"></script>
+<script src="${request.contextPath}/static/js/cronGen.mini.js"></script>
 </body>
 </html>
