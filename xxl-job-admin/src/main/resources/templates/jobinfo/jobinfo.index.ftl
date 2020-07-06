@@ -446,6 +446,6 @@ exit 0
 <!-- moment -->
 <script src="${request.contextPath}/static/adminlte/bower_components/moment/moment.min.js"></script>
 <script src="${request.contextPath}/static/js/jobinfo.index.1.js"></script>
-<script src="${request.contextPath}/static/js/cronGen.mini.js"></script>
+<script src="${request.contextPath}/static/js/cronGen.js"></script>
 </body>
 </html>
