@@ -1040,21 +1040,59 @@
                 }
             }
     	},
-        cronResult : function() {
+      cronResult : function() {
             var result;
+            var i=0;
             var second = $("#secondHidden").val();
+            i=second== ""?i:1;
             second = second== "" ? "*":second;
             var minute = $("#minHidden").val();
+            i=minute== ""?i:2;
             minute = minute== "" ? "*":minute;
             var hour = $("#hourHidden").val();
+            i=hour== ""?i:3;
             hour = hour== "" ? "*":hour;
             var day = $("#dayHidden").val();
+            i=day== ""?i:4;
             day = day== "" ? "*":day;
             var month = $("#monthHidden").val();
+            i=month== ""?i:5;
             month = month== "" ? "*":month;
             var week = $("#weekHidden").val();
+            i=week== ""?i:6;
             week = week== "" ? "?":week;
             var year = $("#yearHidden").val();
+            i=year== ""?i:7;
+
+            if(i>=7){
+                second=second== "*"?"0":second;
+                minute=minute== "*"?"0":minute;
+                hour=hour== "*"?"0":hour;
+                month=month== "*"?"0":month;
+                day=day== "*"?"0":day;
+                week=week== "?"?"0":week;
+            }else if(i>=6){
+                second=second== "*"?"0":second;
+                minute=minute== "*"?"0":minute;
+                hour=hour== "*"?"0":hour;
+                month=month== "*"?"0":month;
+                day=day== "*"?"0":day;
+            }else if(i>=5){
+                second=second== "*"?"0":second;
+                minute=minute== "*"?"0":minute;
+                hour=hour== "*"?"0":hour;
+                month=month== "*"?"0":month;
+            }else if(i>=4){
+                second=second== "*"?"0":second;
+                minute=minute== "*"?"0":minute;
+                hour=hour== "*"?"0":hour;
+            }else if(i>=3){
+                second=second== "*"?"0":second;
+                minute=minute== "*"?"0":minute;
+            }else if(i>=2){
+                second=second== "*"?"0":second;
+            }
+
             if(year!="")
             {
                 result = second+" "+minute+" "+hour+" "+day+" "+month+" "+week+" "+year;
